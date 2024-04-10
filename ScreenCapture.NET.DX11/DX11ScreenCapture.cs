@@ -442,8 +442,11 @@ public sealed class DX11ScreenCapture : AbstractScreenCapture<ColorBGRA>
         {
             foreach (ZoneTextures textures in _textures.Values)
                 textures.Dispose();
+            foreach (var captureZone in CaptureZones)
+                this.UnregisterCaptureZone(captureZone);
+            CaptureZones.Clear();
             _textures.Clear();
-
+            
             DisposeDX();
         }
     }
